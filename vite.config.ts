@@ -1,27 +1,15 @@
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-
-type Define<Keys extends string[]> = {
-  [Key in Keys[number] as `VITE_${Key}`]: string;
-};
-
-const defineForEnv = (env: Record<string, string>, keys: string[]) => {
-  return keys.reduce<Partial<Define<typeof keys>>>((define, key) => {
-    return Object.assign(define, {
-      [`VITE_${key}`]: JSON.stringify(env[key]),
-    });
-  }, {}) as Define<typeof keys>;
-};
+import { ValidateEnv } from '@julr/vite-plugin-validate-env';
+import envConfig from './env.ts';
 
 // https://vite.dev/config/
 export default defineConfig(({ mode, isSsrBuild }) => {
-  const env = loadEnv(mode, import.meta.dirname, '');
+  const plugins: PluginOption[] = [ValidateEnv()];
 
   if (isSsrBuild || 'SSR' in process.env) {
-    const keys = ['PORT'];
-    const define = defineForEnv(env, keys);
-
     return {
+      plugins,
       build: {
         ssr: true,
         sourcemap: true,
@@ -31,12 +19,16 @@ export default defineConfig(({ mode, isSsrBuild }) => {
           input: 'server/src/index.ts',
         },
       },
-      define,
     };
   }
 
+  plugins.push(react());
+
+  const { VITE_PORT } = loadEnv(mode, import.meta.dirname);
+  const PORT = envConfig.VITE_PORT('VITE_PORT', VITE_PORT);
+
   return {
-    plugins: [react()],
+    plugins,
     build: {
       sourcemap: true,
       outDir: 'dist/client',
@@ -47,7 +39,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
     },
     server: {
       proxy: {
-        '/api': `http://localhost:${env.PORT}`,
+        '/api': `http://localhost:${PORT}`,
       },
     },
   };

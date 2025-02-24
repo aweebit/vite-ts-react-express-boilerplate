@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "types": [
+      "vite",
+      "@vitejs/plugin-react-swc",
+      "@julr/vite-plugin-validate-env"
+    ]
+  },
+  "include": ["../vite.config.ts", "../env.ts"]
+}
