@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "react", "react-dom"],
+    "jsx": "react-jsx"
+  },
+  "include": ["../client"],
+  "references": [
+    { "path": "./tsconfig.server.json" }
+  ]
+}
