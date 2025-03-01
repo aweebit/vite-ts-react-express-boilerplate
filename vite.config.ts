@@ -8,6 +8,8 @@ export default defineConfig(({ mode, isSsrBuild }) => {
   const plugins: PluginOption[] = [ValidateEnv()];
 
   if (isSsrBuild || 'SSR' in process.env) {
+    // This should be refactored to have "server" as the "root" after
+    // https://github.com/vitest-dev/vitest/issues/7538 is fixed.
     return {
       plugins,
       build: {
@@ -29,12 +31,14 @@ export default defineConfig(({ mode, isSsrBuild }) => {
 
   return {
     plugins,
+    root: 'client',
+    envDir: '..',
     build: {
       sourcemap: true,
-      outDir: 'dist/client',
+      outDir: '../dist/client',
       emptyOutDir: true,
       rollupOptions: {
-        input: 'index.html', // https://github.com/vitejs/vite/issues/19493
+        input: 'client/index.html',
       },
     },
     server: {
