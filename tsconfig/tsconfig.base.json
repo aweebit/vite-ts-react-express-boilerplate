@@ -12,6 +12,7 @@
     "noEmit": true,
     "declaration": true,
     "emitDeclarationOnly": true,
+    "incremental": true,
 
     /* Language: */
     "useDefineForClassFields": true,
