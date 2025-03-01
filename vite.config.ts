@@ -15,7 +15,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
       build: {
         ssr: true,
         sourcemap: true,
-        outDir: 'dist/server',
+        outDir: 'server/dist',
         emptyOutDir: true,
         rollupOptions: {
           input: 'server/src/index.ts',
@@ -35,7 +35,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
     envDir: '..',
     build: {
       sourcemap: true,
-      outDir: '../dist/client',
+      outDir: 'dist',
       emptyOutDir: true,
       rollupOptions: {
         input: 'client/index.html',

@@ -5,7 +5,7 @@ import { PORT } from './global.ts';
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(join(import.meta.dirname, '../client')));
+  app.use(express.static(join(import.meta.dirname, '../../client')));
 }
 
 const server = app.listen(PORT, () => {

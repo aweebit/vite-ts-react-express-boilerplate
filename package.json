@@ -12,7 +12,7 @@
     "build:server": "tsc -b tsconfig/tsconfig.server.json && vite build --ssr",
     "build": "tsc -b && vite build && vite build --ssr",
     "preview": "vite preview",
-    "start": "cross-env NODE_ENV=production node dist/server/index.js"
+    "start": "cross-env NODE_ENV=production node server/dist/index.js"
   },
   "dependencies": {
     "express": "^4.21.2",
