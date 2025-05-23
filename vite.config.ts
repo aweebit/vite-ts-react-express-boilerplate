@@ -1,7 +1,7 @@
-import { defineConfig, loadEnv, type PluginOption } from 'vite';
-import react from '@vitejs/plugin-react-swc';
 import { ValidateEnv } from '@julr/vite-plugin-validate-env';
-import envConfig from './env.ts';
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig, loadEnv, type PluginOption } from 'vite';
+import envConfig from './env';
 
 // https://vite.dev/config/
 export default defineConfig(({ mode, isSsrBuild }) => {

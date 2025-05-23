@@ -1,6 +1,6 @@
 import express from 'express';
 import { join } from 'node:path';
-import { PORT } from './global.ts';
+import { PORT } from './global';
 
 const app = express();
 
