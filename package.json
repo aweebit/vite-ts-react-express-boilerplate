@@ -8,6 +8,7 @@
     "server": "cross-env SSR= vite-node -w server/src/index.ts",
     "dev": "concurrently -n client,server -c green,magenta \"npm run client\" \"npm run server\"",
     "lint": "eslint .",
+    "prettier": "prettier . --write",
     "build:client": "tsc -b tsconfig/tsconfig.client.json && vite build",
     "build:server": "tsc -b tsconfig/tsconfig.server.json && vite build --ssr",
     "build": "tsc -b && vite build && vite build --ssr",
